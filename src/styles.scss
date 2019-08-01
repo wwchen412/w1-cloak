@@ -1,1 +1,11 @@
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import 'src/color.scss';
+
 /* You can add global styles to this file, and also import other style files */
+body{
+    height: 100vh;
+    width: 100%;
+    background: $bgColor;
+    font-family: 'Century Gothic','微軟正黑體';
+    color: $mainColor;
+}

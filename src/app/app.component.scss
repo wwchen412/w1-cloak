@@ -1,0 +1,86 @@
+@import "../color.scss";
+.body_bg{
+    position: relative;
+    height: 100%;
+    width: 100%;
+    & > img{
+        position: absolute;
+        z-index: -1;
+    }
+    &_left{
+        left:0;
+    }
+    &_btm{
+    bottom: 0;
+    right: 200px;
+    }
+    &_right{
+     right: 0;
+    }
+    &_top{
+        top: 0;
+        left: 300px;
+    }
+}
+// task input
+.addTask{
+  position: absolute;
+  left: 50px;
+  top: 0;
+  width: 340px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .input_group{
+    border-bottom: 1px solid $mainColor;
+  }
+  input{
+    outline: 0;
+  }
+  input[type="text"]{
+    width: calc(100% - 30px);
+    appearance: none;
+    border: 0;
+    color: $mainColor;
+    background: transparent;
+    letter-spacing: 5px;
+    padding: 5px;
+    &:not(:focus){
+      filter: opacity(0.3);
+    }
+    &::placeholder{
+      color: #fff;
+      letter-spacing: 5px;
+    }
+    &:focus{
+      outline: 0;
+      &::placeholder{
+        color: $mainColor;
+      }
+    }
+  }
+  &_btn{
+    width: 21px;
+  }
+}
+// 時鐘區塊
+.mainContent{
+  position: relative;
+}
+//側邊攔
+.side_bar{
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  li{
+    list-style: none;
+    margin: 30px 0;
+  }
+
+}

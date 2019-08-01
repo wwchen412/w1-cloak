@@ -1,0 +1,52 @@
+@import 'src/color.scss';
+:host(){
+    display: flex;
+    // border: 5px solid $mainColor;
+    width: 635px;
+    height: 635px;
+    border-radius: 320px;
+    justify-content: space-around;
+    flex-direction:  column;
+    padding: 150px 50px 40px;
+    align-items: center;
+    box-sizing: border-box;
+    margin: auto;
+
+    position: relative;
+    h3{
+      letter-spacing: 5px;
+    }
+    h2{
+        font-size: 90px;
+        letter-spacing: 20px;
+    }
+    input[type="image"]{
+        margin:0 10px;
+        border-radius: 50%;
+        transition: .5s;
+        &:hover{
+            background:rgba($mainColor,.3);
+            box-shadow:inset 0 0 10px rgba(#fff,.5);
+        }
+    }
+    svg{
+        width: 635px;
+        height: 635px;
+        // background: rgba(255,255,255,.5);
+        position :absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        .circle_bg{
+            stroke: rgba($mainColor , .4);
+            stroke-width: 5px;
+            fill: transparent;
+        }
+        .circle_fill{
+            stroke: rgba($mainColor ,1);
+            stroke-width: 5px;
+            fill: transparent;
+            stroke-dasharray: 673, 3989.82;
+        }
+    }
+}
