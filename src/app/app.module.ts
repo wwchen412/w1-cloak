@@ -5,13 +5,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { THeaderComponent } from './components/t-header/t-header.component';
 import { ClockComponent } from './components/clock/clock.component';
+import { TaskListComponent } from './components/task-list/task-list.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     THeaderComponent,
-    ClockComponent
+    ClockComponent,
+    TaskListComponent
   ],
   imports: [
     BrowserModule,

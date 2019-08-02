@@ -1,5 +1,5 @@
 @import 'src/color.scss';
-:host(){
+.clock{
     display: flex;
     // border: 5px solid $mainColor;
     width: 635px;
@@ -38,15 +38,19 @@
         left: 0;
         z-index: -1;
         .circle_bg{
-            stroke: rgba($mainColor , .4);
+          stroke: $mainColor;
             stroke-width: 5px;
             fill: transparent;
         }
         .circle_fill{
-            stroke: rgba($mainColor ,1);
+
+            stroke: #D27A70;
             stroke-width: 5px;
             fill: transparent;
             stroke-dasharray: 673, 3989.82;
         }
     }
+}
+.nextTask{
+  color: $transparentColor;
 }
