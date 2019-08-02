@@ -24,6 +24,10 @@
     }
     &__group{
       background-color: $bgColor;
+      ul{
+        display: flex;
+        flex-direction: column;
+      }
       li{
         border-bottom: 1px dashed $mainColor;
         padding: 12px 0;
@@ -31,17 +35,26 @@
           display: inline-block;
           vertical-align: middle;
         }
+        input{
+          display: none;
+          &:checked + label{
+            background: url('src/assets/img/checked.svg') no-repeat;
+            background-size: contain;
+            width: 22px;
+            height: 22px;
+            margin-right: calc(1rem - 2px);
+          }
+        }
         label{
           width: 20px;
           height: 20px;
-          border:2px solid $mainColor;
-          border-radius: 50%;
+          background: url('src/assets/img/uncheck.svg')  no-repeat;
+          background-size: contain;
           margin-right: 1rem;
           margin-bottom: 0;
+          cursor: pointer;
         }
-        input{
-          display: none;
-        }
+
       }
     }
 }

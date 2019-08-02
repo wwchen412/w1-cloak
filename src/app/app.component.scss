@@ -29,6 +29,7 @@
   justify-content: space-between;
   align-items: center;
 }
+
 // task input
 .addTask{
   // position: absolute;
@@ -76,13 +77,17 @@
 
 //側邊攔
 .side_bar{
-  // position: absolute;
-  // right: 0;
-  // top: 0;
   height: 100%;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+  input{
+    outline: 0;
+    filter: brightness(.9);
+    &:hover,.active{
+      filter: brightness(1);
+    }
+  }
   &.list--active{
     justify-content:space-between;
     &::before{

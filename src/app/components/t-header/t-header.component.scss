@@ -21,6 +21,20 @@ header{
         display: flex;
         flex-direction: column;
         align-items: flex-end;
+        &--active{
+          // background-color: #154546;
+          & > div{
+            &:nth-child(1){
+              transform: rotate(45deg) translate(7.5px,10px);
+            }
+            &:nth-child(2){
+              transform: rotate(-45deg);
+            }
+            &:nth-child(3){
+             display: none;
+            }
+          }
+        }
     }
     .menu_dash{
         width: 50px;

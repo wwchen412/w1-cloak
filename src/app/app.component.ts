@@ -7,4 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   public listActive:boolean = false;
+  private openTaskList(status:boolean){
+    this.listActive = !status;
+  }
 }
