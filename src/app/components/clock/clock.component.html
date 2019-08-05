@@ -5,11 +5,11 @@
     <!-- <circle id="chart" cx="635" cy="635" r="617" transform="rotate(-635 635 635)"/> -->
   </svg>
   <h3> Clean up the desk</h3>
-  <h2> 06 : 15</h2>
+  <h2>{{countTime  | minuteSeconds}}</h2>
   <div class="clock__option">
     <input type="image" src="../assets/img/clock_btn1.svg" class="clock__option__btn">
-    <input type="image" src="../assets/img/clock_btn2.svg" class="clock__option__btn">
-    <input type="image" src="../assets/img/clock_btn3.svg" class="clock__option__btn">
+    <input type="image" src="../assets/img/clock_btn2.svg" class="clock__option__btn" (click)="onPause()">
+    <input type="image" src="../assets/img/clock_btn3.svg" class="clock__option__btn" (click)="onResume()">
   </div>
 </div>
 <h4 class="mt-4 nextTask text-center">Next: Feed the cat</h4>

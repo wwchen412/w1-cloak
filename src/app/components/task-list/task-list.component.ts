@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ConstService } from 'src/app/services/const.service';
 
 @Component({
   selector: 'app-task-list',
@@ -7,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TaskListComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private $const: ConstService
+  ) { }
 
+  public lists$ = this.$const.taskList;
   ngOnInit() {
   }
 
