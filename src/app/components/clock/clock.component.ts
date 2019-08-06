@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ConstService } from 'src/app/services/const.service';
 import { interval, of, Subject } from 'rxjs';
-import { map, filter, mergeMap, switchMap, tap, takeWhile, takeUntil } from 'rxjs/operators';
+import { map, filter, mergeMap, switchMap, tap, takeWhile, takeUntil, find, mergeAll } from 'rxjs/operators';
 
 
 @Component({
@@ -12,13 +12,20 @@ import { map, filter, mergeMap, switchMap, tap, takeWhile, takeUntil } from 'rxj
 export class ClockComponent implements OnInit {
 
   constructor(
-    private $const: ConstService
+    public $const: ConstService
   ) { }
+  private activeId = '1564979718104';
+  public taskList$ = this.$const.taskList$.pipe(
+    mergeAll(),
+    filter(task => task.id === this.activeId),
+  );
 
   public countTime = this.$const.defaultTime;
   private timerPaused = new Subject;
+  public workingStatus = false;
   public time$ = this.timerPaused.pipe(
     filter(x => !!x),
+    // tslint:disable-next-line: deprecation
     mergeMap(
       intervalTime => interval(1000).pipe(takeUntil(this.timerPaused)),
       (status, time) => ({ status, time: this.countTime - 1 })
@@ -26,15 +33,24 @@ export class ClockComponent implements OnInit {
     takeWhile(x => x.time >= 0),
   ).subscribe(x => {
     this.countTime = x.time;
-  })
+  });
+
+  public getTimePercent() {
+    const r = document.querySelector('.circle_fill').getAttribute('r');
+    const processTime = (this.$const.defaultTime - this.countTime) / this.$const.defaultTime * 2;
+    const circlePercent = +r * processTime * Math.PI;
+    return circlePercent;
+  }
+
 
   onPause() {
-     this.timerPaused.next(false);
+    this.timerPaused.next(false);
+    this.workingStatus = false;
   }
 
   onResume() {
-
     this.timerPaused.next(true);
+    this.workingStatus = true;
   }
   ngOnInit() {
 

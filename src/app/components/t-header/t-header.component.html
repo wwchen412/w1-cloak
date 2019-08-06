@@ -3,7 +3,8 @@
     <img src="../assets/img/logo.svg" class="logo" alt="">
     <h1 class="d-inline-block">To-Do-List Alarm System</h1>
   </a>
-  <div class="menu" [ngClass]="{'menu--active': menuActive}">
+  {{listActive}}
+  <div class="menu" [ngClass]="{'menu--active': menuActive}" (click)="openTaskList(listActive)">
     <div class="menu_dash"></div>
     <div class="menu_dash"></div>
     <div class="menu_dash menu_dash--short"></div>

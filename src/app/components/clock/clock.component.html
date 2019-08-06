@@ -1,15 +1,24 @@
 <div class="clock">
   <svg class="chart">
     <circle cx="317.5" cy="317.5" r="315" class="circle_bg" />
-    <circle cx="317.5" cy="317.5" r="315" class="circle_fill" transform="rotate(630 317.5 317.5)" />
-    <!-- <circle id="chart" cx="635" cy="635" r="617" transform="rotate(-635 635 635)"/> -->
+    <circle cx="317.5" cy="317.5" r="315" class="circle_fill" transform="rotate(630 317.5 317.5)"
+    attr.stroke-dasharray=" {{getTimePercent ()}},3989" />
   </svg>
-  <h3> Clean up the desk</h3>
-  <h2>{{countTime  | minuteSeconds}}</h2>
-  <div class="clock__option">
-    <input type="image" src="../assets/img/clock_btn1.svg" class="clock__option__btn">
-    <input type="image" src="../assets/img/clock_btn2.svg" class="clock__option__btn" (click)="onPause()">
-    <input type="image" src="../assets/img/clock_btn3.svg" class="clock__option__btn" (click)="onResume()">
-  </div>
+  <ng-container *ngIf="taskList$ | async as taskList">
+    <h3> {{taskList.title}}</h3>
+    <h2>{{countTime  | minuteSeconds}}</h2>
+
+    <div class="clock__option">
+      <input type="image" src="../assets/img/clock_btn1.svg" class="clock__option__btn">
+      <input type="image" src="../assets/img/clock_btn2.svg" class="clock__option__btn" (click)="onPause()">
+      <ng-container *ngIf="!workingStatus; else timeToPause">
+        <input type="image" src="../assets/img/clock_btn3.svg" class="clock__option__btn" (click)="onResume()" >
+      </ng-container>
+
+    </div>
+  </ng-container>
 </div>
+
 <h4 class="mt-4 nextTask text-center">Next: Feed the cat</h4>
+
+<ng-template  #timeToPause><input type="image" src="../assets/img/clock_btn2.svg" class="clock__option__btn" (click)="onPause()"></ng-template>

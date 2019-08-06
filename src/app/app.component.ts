@@ -9,10 +9,6 @@ export class AppComponent {
   constructor(
     private $const: ConstService
   ) { }
-
-  public listActive: boolean = false;
-
-  private openTaskList(status: boolean) {
-    this.listActive = !status;
-  }
+    public listActive = this.$const.listActive;
+    public openTaskList = this.$const.openTaskList;
 }

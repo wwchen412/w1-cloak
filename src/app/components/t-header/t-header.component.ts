@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ConstService } from 'src/app/services/const.service';
 
 @Component({
   selector: 'app-t-header',
@@ -7,8 +8,15 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class THeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private $const: ConstService
+  ) {
+
+  }
   @Input() menuActive;
+
+  public listActive = this.$const.listActive;
+  public openTaskList = this.$const.openTaskList;
   ngOnInit() {
   }
 
