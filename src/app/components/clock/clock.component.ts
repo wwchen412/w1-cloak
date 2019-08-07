@@ -15,10 +15,8 @@ export class ClockComponent implements OnInit {
     public $const: ConstService
   ) { }
   private activeId = '1564979718104';
-  public taskList$ = this.$const.taskList$.pipe(
-    mergeAll(),
-    filter(task => task.id === this.activeId),
-  );
+  public alramSettings = this.$const.alramSettings;
+  public taskListOnhold$ = this.$const.taskListOnhold$;
 
   public countTime = this.$const.defaultTime;
   private timerPaused = new Subject;
@@ -40,7 +38,8 @@ export class ClockComponent implements OnInit {
     const processTime = (this.$const.defaultTime - this.countTime) / this.$const.defaultTime * 2;
     const circlePercent = +r * processTime * Math.PI;
     return circlePercent;
-  }
+  };
+
 
 
   onPause() {
@@ -51,6 +50,9 @@ export class ClockComponent implements OnInit {
   onResume() {
     this.timerPaused.next(true);
     this.workingStatus = true;
+  }
+  toggleAlram(alarm) {
+    this.alramSettings = !alarm;
   }
   ngOnInit() {
 
