@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { mapTo, filter, mergeAll, tap, take } from 'rxjs/operators';
+import { mapTo, filter, mergeAll, tap, take, switchMap } from 'rxjs/operators';
 import { interval, of, merge } from 'rxjs';
 
 @Injectable({
@@ -52,8 +52,8 @@ export class ConstService {
 
     mergeAll(),
     filter(task => task.status),
-    // tap(task => this.taskListOnholdList.push(task)),
-    tap(console.log)
+    tap(task => this.taskListOnholdList.push(task)),
+    switchMap(_ => of(this.taskListOnholdList)),
   );
 
   public listActive = false;
