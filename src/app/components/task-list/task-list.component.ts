@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ConstService } from 'src/app/services/const.service';
 import { mergeAll, tap } from 'rxjs/operators';
 
@@ -8,14 +8,34 @@ import { mergeAll, tap } from 'rxjs/operators';
   styleUrls: ['./task-list.component.scss']
 })
 export class TaskListComponent implements OnInit {
+  @ViewChild ('addTaskText') inputTask: ElementRef;
 
   constructor(
     private $const: ConstService
   ) { }
-  // public listArray: [];
-  public lists$ = this.$const.taskList;
+  public lists;
+  public lists$ = this.$const.taskList$.subscribe(
+    res =>  this.lists = res
+  );
+
+
+  public toggleFinish(evt) {
+    const listId = evt.target.id;
+    const ori_status = evt.target.checked;
+    this.$const.changeListStatus(listId, ori_status);
+  }
 
   ngOnInit() {
+    console.log(this.inputTask);
+  }
+  public addTaskBtn(inputText) {
+    const text = inputText.value.trim();
+    this.$const.taskList.push({
+      'id': Date.now().toString(),
+      'status': false,
+      'title': text
+    });
+    inputText.value = '';
   }
 
 }

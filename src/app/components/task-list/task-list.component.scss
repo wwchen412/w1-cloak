@@ -31,9 +31,14 @@
       li{
         border-bottom: 1px dashed $mainColor;
         padding: 12px 0;
+        order: 0;
         &>*{
           display: inline-block;
           vertical-align: middle;
+        }
+        &.finished{
+          order: 1;
+          opacity: .6;
         }
         input{
           display: none;

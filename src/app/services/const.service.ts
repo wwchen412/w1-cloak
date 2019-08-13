@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 
-import { mapTo, filter, mergeAll, tap, take, switchMap } from 'rxjs/operators';
+import { mapTo, filter, mergeAll, tap, take, switchMap, throttleTime } from 'rxjs/operators';
 import { interval, of, merge } from 'rxjs';
+import { element } from '@angular/core/src/render3';
 
 @Injectable({
   providedIn: 'root'
@@ -23,9 +24,9 @@ export class ConstService {
     {
       title: 'Call to Mars',
       status: true,
-      id: new Date('2019/08/07').getTime().toString()
+      id: new Date('2019/08/09').getTime().toString()
     }, {
-      title: ' Call to Wil',
+      title: ' Call to Will',
       status: false,
       id: new Date('2019/08/07').getTime().toString()
     }, {
@@ -41,7 +42,7 @@ export class ConstService {
       status: false,
       id: new Date('2019/08/03').getTime().toString()
     }, {
-      title: ' Call to josehph',
+      title: ' Call to John',
       status: false,
       id: new Date('2019/08/05').getTime().toString()
     }
@@ -51,9 +52,9 @@ export class ConstService {
   public taskListOnhold$ = this.taskList$.pipe(
 
     mergeAll(),
-    filter(task => task.status),
+    filter(task => !task.status),
     tap(task => this.taskListOnholdList.push(task)),
-    switchMap(_ => of(this.taskListOnholdList)),
+    switchMap(_ => of(this.taskListOnholdList))
   );
 
   public listActive = false;
@@ -62,4 +63,13 @@ export class ConstService {
   public openTaskList(status: boolean) {
     this.listActive = !status;
   }
+  public changeListStatus(id, checked) {
+    for (let i = 0; i < this.taskList.length; i++) {
+      if (this.taskList[i].id === id) {
+        this.taskList[i].status = checked;
+      }
+    }
+  }
+
+
 }

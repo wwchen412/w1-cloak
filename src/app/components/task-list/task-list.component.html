@@ -1,15 +1,17 @@
 <div class="task_list">
   <div class="task_list__add">
     <div class="input_group rounded mb-3">
-      <input type="text" placeholder="Add a new mission..." class="p-2">
-      <input type="image" src="../assets/img/plus.svg" alt="" class="d-inline-block addTask_btn">
+      <input type="text" placeholder="Add a new mission..." class="p-2" id="addTaskInput" #addTaskText (keyup.enter)="addTaskBtn(addTaskText)">
+      <input type="image" src="../assets/img/plus.svg" alt="" class="d-inline-block addTask_btn" (click)="addTaskBtn(addTaskText)">
     </div>
     <div class="task_list__calendar text-center p-1">
       2019/08/02
     </div>
     <div class="task_list__group p-3 py-4">
       <ul class="list-unstyled">
-        <li *ngFor="let list of lists$" ><input type="checkbox" id="{{list.id}}" [checked]="list.status"><label for="{{list.id}}"></label>{{list.title}}</li>
+        <li *ngFor="let list of lists " [ngClass]="{'finished': list.status}" >
+          <input type="checkbox" id="{{list.id}}" [checked]="list.status" (change)="toggleFinish($event)">
+          <label for="{{list.id}}" ></label>{{list.title}}</li>
       </ul>
     </div>
   </div>
