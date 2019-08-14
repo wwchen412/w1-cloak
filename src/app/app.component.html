@@ -1,4 +1,4 @@
-<div class="container-fluid body_bg">
+<div class="container-fluid body_bg" >
   <app-t-header [menuActive]="listActive"></app-t-header>
   <img src="../assets/img/bg1.svg" class="body_bg_btm" alt="">
   <img src="../assets/img/bg2.svg" class="body_bg_top" alt="">
@@ -22,14 +22,7 @@
       </div>
     </div>
     <div class="col-3" [ngClass]="{'col-6': listActive}">
-      <div class="side_bar" [ngClass]="{'list--active':listActive}">
-        <ul class="pl-0">
-          <li><input type="image" src="../assets/img/sideBar_btn1.svg" (click)="openTaskList(listActive)"></li>
-          <li><input type="image" src="../assets/img/sideBar_btn2.svg"></li>
-          <li><input type="image" src="../assets/img/sideBar_btn3.svg"></li>
-        </ul>
-        <app-task-list *ngIf="listActive"></app-task-list>
-      </div>
+      <app-side-bar [menuActive]="listActive"></app-side-bar>
     </div>
     <!-- right side bar options -->
   </div>

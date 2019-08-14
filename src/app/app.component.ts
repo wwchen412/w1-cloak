@@ -9,6 +9,9 @@ export class AppComponent {
   constructor(
     private $const: ConstService
   ) { }
-    public listActive = this.$const.listActive;
-    public openTaskList = this.$const.openTaskList;
+  public listActive ;
+  public listActive$ = this.$const.listActive$.subscribe(
+    res => console.log(this.listActive = res)
+  );
+  // public openTaskList = this.$const.openTaskList;
 }

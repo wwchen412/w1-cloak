@@ -30,7 +30,12 @@ export class ClockComponent implements OnInit {
     ),
     takeWhile(x => x.time >= 0),
   ).subscribe(x => {
-    this.countTime = x.time;
+    if (x.time === 0) {
+      this.countTime = this.$const.defaultTime;
+    } else {
+      this.countTime = x.time;
+    }
+
   });
 
   public getTimePercent() {

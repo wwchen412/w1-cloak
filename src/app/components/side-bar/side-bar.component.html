@@ -1,0 +1,10 @@
+<ng-container *ngIf="listActive$ | async as listActive">
+<div class="side_bar" [ngClass]="{'list--active':listActive}">
+  <ul class="pl-0">
+    <li><input type="image" src="../assets/img/sideBar_btn1.svg" (click)="openTaskList(listActive)"></li>
+    <li><input type="image" src="../assets/img/sideBar_btn2.svg"></li>
+    <li><input type="image" src="../assets/img/sideBar_btn3.svg"></li>
+  </ul>
+  <app-task-list *ngIf="listActive"></app-task-list>
+</div>
+</ng-container>

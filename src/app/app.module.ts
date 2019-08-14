@@ -7,6 +7,7 @@ import { THeaderComponent } from './components/t-header/t-header.component';
 import { ClockComponent } from './components/clock/clock.component';
 import { TaskListComponent } from './components/task-list/task-list.component';
 import { MinuteSecondsPipe } from './minute-seconds.pipe';
+import { SideBarComponent } from './components/side-bar/side-bar.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { MinuteSecondsPipe } from './minute-seconds.pipe';
     THeaderComponent,
     ClockComponent,
     TaskListComponent,
-    MinuteSecondsPipe
+    MinuteSecondsPipe,
+    SideBarComponent
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { mapTo, filter, mergeAll, tap, take, switchMap, throttleTime } from 'rxjs/operators';
-import { interval, of, merge } from 'rxjs';
+import { interval, of, merge, Subject, BehaviorSubject, Observable } from 'rxjs';
 import { element } from '@angular/core/src/render3';
 
 @Injectable({
@@ -50,23 +50,26 @@ export class ConstService {
   public taskList$ = of(this.taskList);
 
   public taskListOnhold$ = this.taskList$.pipe(
-
     mergeAll(),
     filter(task => !task.status),
     tap(task => this.taskListOnholdList.push(task)),
     switchMap(_ => of(this.taskListOnholdList))
   );
 
-  public listActive = false;
+  public listActive: BehaviorSubject<any> = new BehaviorSubject<boolean> (false);
+  public listActive$: Observable<any> = this.listActive.asObservable();
   public alramSettings = true;
 
   public openTaskList(status: boolean) {
-    this.listActive = !status;
+    console.log('status', status);
+    this.listActive.next(!status);
+    console.log('this.listActive', this.listActive);
   }
   public changeListStatus(id, checked) {
-    for (let i = 0; i < this.taskList.length; i++) {
-      if (this.taskList[i].id === id) {
-        this.taskList[i].status = checked;
+    for (const task of this.taskList) {
+      if (task.id === id) {
+        task.status = checked;
+        break;
       }
     }
   }
