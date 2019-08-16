@@ -56,14 +56,12 @@ export class ConstService {
     switchMap(_ => of(this.taskListOnholdList))
   );
 
-  public listActive: BehaviorSubject<any> = new BehaviorSubject<boolean> (false);
+  public listActive: BehaviorSubject<any> = new BehaviorSubject<any>({ active: false, activeBtn: 'menuActive' });
   public listActive$: Observable<any> = this.listActive.asObservable();
   public alramSettings = true;
 
-  public openTaskList(status: boolean) {
-    console.log('status', status);
-    this.listActive.next(!status);
-    console.log('this.listActive', this.listActive);
+  public openTaskList(status: boolean, activeStatusBtn: String) {
+    this.listActive.next({ active: !status, activeBtn: activeStatusBtn });
   }
   public changeListStatus(id, checked) {
     for (const task of this.taskList) {

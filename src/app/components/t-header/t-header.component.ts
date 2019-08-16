@@ -15,8 +15,8 @@ export class THeaderComponent implements OnInit {
   }
   @Input() menuActive;
 
-  openTaskList(active) {
-    this.$const.openTaskList(active);
+  openTaskList(active,activeBtn) {
+    this.$const.openTaskList(active ,activeBtn);
   }
   ngOnInit() {
   }

@@ -11,11 +11,10 @@ export class SideBarComponent implements OnInit {
     private $const: ConstService
   ) { }
 
-  public listActive$ = this.$const.listActive$;
-
   ngOnInit() {
   }
-  openTaskList(active) {
-    this.$const.openTaskList(active);
+  openTaskList(active, activeBtn) {
+    this.$const.openTaskList(active, activeBtn);
+
   }
 }
