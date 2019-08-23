@@ -6,7 +6,7 @@
   input{
     outline: 0;
     filter: brightness(.9);
-    &:hover,.active{
+    &:hover,&.active{
       filter: brightness(1);
     }
   }

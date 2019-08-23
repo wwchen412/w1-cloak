@@ -14,7 +14,7 @@ export class ClockComponent implements OnInit {
   constructor(
     public $const: ConstService
   ) { }
-  private activeId = '1564979718104';
+
   public alramSettings = this.$const.alramSettings;
   public taskListOnhold$ = this.$const.taskListOnhold$;
 
@@ -43,7 +43,7 @@ export class ClockComponent implements OnInit {
     const processTime = (this.$const.defaultTime - this.countTime) / this.$const.defaultTime * 2;
     const circlePercent = +r * processTime * Math.PI;
     return circlePercent;
-  };
+  }
 
 
 

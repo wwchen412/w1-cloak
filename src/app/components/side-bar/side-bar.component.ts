@@ -14,6 +14,7 @@ export class SideBarComponent implements OnInit {
   ngOnInit() {
   }
   openTaskList(active, activeBtn) {
+    console.log(active,activeBtn);
     this.$const.openTaskList(active, activeBtn);
 
   }

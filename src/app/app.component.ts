@@ -13,5 +13,4 @@ export class AppComponent {
   public listActive$ = this.$const.listActive$.subscribe(
     res => console.log(this.listActive = res)
   );
-  // public openTaskList = this.$const.openTaskList;
 }

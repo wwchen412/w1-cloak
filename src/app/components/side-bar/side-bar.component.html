@@ -1,9 +1,9 @@
-<div class="side_bar" [ngClass]="{'list--active':menuActive}">
+<div class="side_bar" [ngClass]="{'list--active':menuActive.active}">
   <ul class="pl-0">
-    <li><input type="image" src="../assets/img/sideBar_btn1.svg" (click)="openTaskList(menuActive,'listBtnMenu')" [ngClass]="{active: listBtnMenu}"></li>
-    <li><input type="image" src="../assets/img/sideBar_btn2.svg"></li>
-    <li><input type="image" src="../assets/img/sideBar_btn3.svg"></li>
+    <li><input type="image" src="../assets/img/sideBar_btn1.svg" (click)="openTaskList(menuActive.active,'listBtnMenu')" [ngClass]="{'active': menuActive.active && menuActive.activeBtn == 'listBtnMenu'}"></li>
+    <li><input type="image" src="../assets/img/sideBar_btn2.svg" (click)="openTaskList(menuActive.active,'chartMenu')" [ngClass]="{'active': menuActive.active && menuActive.activeBtn == 'chartMenu'}"></li>
+    <li><input type="image" src="../assets/img/sideBar_btn3.svg" (click)="openTaskList(menuActive.active,'settingMenu')" [ngClass]="{'active': menuActive.active && menuActive.activeBtn == 'settingMenu'}"></li>
   </ul>
-  <app-task-list *ngIf="menuActive"></app-task-list>
+  <app-task-list *ngIf="menuActive.active"></app-task-list>
 </div>
 

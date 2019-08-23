@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { mapTo, filter, mergeAll, tap, take, switchMap, throttleTime } from 'rxjs/operators';
-import { interval, of, merge, Subject, BehaviorSubject, Observable } from 'rxjs';
+import { mapTo, filter, mergeAll, tap, take, switchMap, throttleTime, map, mergeMap } from 'rxjs/operators';
+import { interval, of, merge, Subject, BehaviorSubject, Observable, from } from 'rxjs';
 import { element } from '@angular/core/src/render3';
 
 @Injectable({
@@ -16,7 +16,8 @@ export class ConstService {
   public defaultTime = this.startMin * 60;
   public restTime = 5 * 60;
   public taskListOnholdList = [];
-
+  public taskListOnholdSubject = new Subject ();
+  // public taskListOnholdListSource = this.taskListOnholdList.asObservable();
 
 
 
@@ -47,21 +48,25 @@ export class ConstService {
       id: new Date('2019/08/05').getTime().toString()
     }
   ];
-  public taskList$ = of(this.taskList);
-
+  public taskList$ = from(this.taskList);
   public taskListOnhold$ = this.taskList$.pipe(
-    mergeAll(),
     filter(task => !task.status),
-    tap(task => this.taskListOnholdList.push(task)),
-    switchMap(_ => of(this.taskListOnholdList))
-  );
-
-  public listActive: BehaviorSubject<any> = new BehaviorSubject<any>({ active: false, activeBtn: 'menuActive' });
+    tap(task => this.pushToOnhold(task)),
+    switchMap(_ =>  this.taskListOnholdSubject),
+    tap(console.log)
+  )
+  public listActive: BehaviorSubject<any> = new BehaviorSubject<any>({ active: false, activeBtn: 'listBtnMenu' });
   public listActive$: Observable<any> = this.listActive.asObservable();
   public alramSettings = true;
 
   public openTaskList(status: boolean, activeStatusBtn: String) {
-    this.listActive.next({ active: !status, activeBtn: activeStatusBtn });
+    const activeStatus = this.listActive.value;
+    if (activeStatus.active && activeStatus.activeBtn !== activeStatusBtn) {
+      this.listActive.next({ active: status, activeBtn: activeStatusBtn });
+    } else {
+      this.listActive.next({ active: !status, activeBtn: activeStatusBtn });
+    }
+
   }
   public changeListStatus(id, checked) {
     for (const task of this.taskList) {
@@ -71,6 +76,9 @@ export class ConstService {
       }
     }
   }
-
+  private pushToOnhold(task){
+    this.taskListOnholdList.push(task);
+    this.taskListOnholdSubject.next(this.taskListOnholdList);
+  }
 
 }

@@ -5,7 +5,6 @@
     <circle cx="317.5" cy="317.5" r="315" class="circle_fill" transform="rotate(630 317.5 317.5)"
       attr.stroke-dasharray=" {{getTimePercent ()}},3989" />
   </svg>
-
     <h3> {{taskList[0].title}}</h3>
     <h2>{{countTime  | minuteSeconds}}</h2>
 
@@ -22,7 +21,7 @@
 
 </div>
 
-<h4 class="mt-5 nextTask text-center">Next: {{taskList[1].title}}</h4>
+<h4 class="mt-5 nextTask text-center">Next: {{taskList[1]?.title}}</h4>
 </ng-container>
 <ng-template #unalarm> <input type="image" src="../assets/img/unalarm.svg" class="clock__option__btn" (click)="toggleAlram(alramSettings)"/></ng-template>
 <ng-template #timeToPause><input type="image" src="../assets/img/pause.svg" class="clock__option__btn active"
