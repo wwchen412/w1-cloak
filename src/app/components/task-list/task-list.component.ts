@@ -14,9 +14,7 @@ export class TaskListComponent implements OnInit {
     private $const: ConstService
   ) { }
   public lists;
-  public lists$ = this.$const.taskList$.subscribe(
-    res =>  this.lists = res
-  );
+  public lists$ = this.$const.taskList$;
 
 
   public toggleFinish(evt) {
@@ -26,10 +24,11 @@ export class TaskListComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.inputTask);
+    // console.log(this.inputTask);
   }
   public addTaskBtn(inputText) {
     const text = inputText.value.trim();
+    // this.$const.taskList$.pipe()
     this.$const.taskList.push({
       'id': Date.now().toString(),
       'status': false,

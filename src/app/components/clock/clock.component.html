@@ -5,14 +5,17 @@
     <circle cx="317.5" cy="317.5" r="315" class="circle_fill" transform="rotate(630 317.5 317.5)"
       attr.stroke-dasharray=" {{getTimePercent ()}},3989" />
   </svg>
-    <h3> {{taskList[0].title}}</h3>
-    <h2>{{countTime  | minuteSeconds}}</h2>
+
+    <h3 *ngIf="taskList"> {{taskList[0]?.title}}</h3>
+    <h2 *ngIf="taskList[0];else  nullTime">{{countTime  | minuteSeconds}}</h2>
+
+
 
     <div class="clock__option">
       <ng-container *ngIf="alramSettings; else unalarm">
         <input type="image" src="../assets/img/clock_btn1.svg" class="clock__option__btn" (click)="toggleAlram(alramSettings)">
       </ng-container>
-      <input type="image" src="../assets/img/clock_btn2.svg" class="clock__option__btn" (click)="onPause()">
+      <input type="image" src="../assets/img/clock_btn2.svg" class="clock__option__btn" (click)="updateListIndex(index?index:0)">
       <ng-container *ngIf="!workingStatus; else timeToPause">
         <input type="image" src="../assets/img/clock_btn3.svg" class="clock__option__btn" (click)="onResume()">
       </ng-container>
@@ -21,8 +24,9 @@
 
 </div>
 
-<h4 class="mt-5 nextTask text-center">Next: {{taskList[1]?.title}}</h4>
+<h4 class="mt-5 nextTask text-center" *ngIf="!!taskList[1]">Next: {{taskList[1]?.title}}</h4>
 </ng-container>
+<ng-template #nullTime> <h2>__:__</h2></ng-template>
 <ng-template #unalarm> <input type="image" src="../assets/img/unalarm.svg" class="clock__option__btn" (click)="toggleAlram(alramSettings)"/></ng-template>
 <ng-template #timeToPause><input type="image" src="../assets/img/pause.svg" class="clock__option__btn active"
     (click)="onPause()"></ng-template>

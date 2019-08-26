@@ -8,7 +8,7 @@
       2019/08/02
     </div>
     <div class="task_list__group p-3 py-4">
-      <ul class="list-unstyled">
+      <ul class="list-unstyled" *ngIf="lists$ | async as lists">
         <li *ngFor="let list of lists " [ngClass]="{'finished': list.status}" >
           <input type="checkbox" id="{{list.id}}" [checked]="list.status" (change)="toggleFinish($event)">
           <label for="{{list.id}}" ></label>{{list.title}}</li>

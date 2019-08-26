@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ConstService } from 'src/app/services/const.service';
-import { interval, of, Subject } from 'rxjs';
+import { interval, of, Subject, BehaviorSubject } from 'rxjs';
 import { map, filter, mergeMap, switchMap, tap, takeWhile, takeUntil, find, mergeAll } from 'rxjs/operators';
 
 
@@ -14,6 +14,9 @@ export class ClockComponent implements OnInit {
   constructor(
     public $const: ConstService
   ) { }
+
+  public activeIndex = new BehaviorSubject<number>(0);
+  public index;
 
   public alramSettings = this.$const.alramSettings;
   public taskListOnhold$ = this.$const.taskListOnhold$;
@@ -43,6 +46,11 @@ export class ClockComponent implements OnInit {
     const processTime = (this.$const.defaultTime - this.countTime) / this.$const.defaultTime * 2;
     const circlePercent = +r * processTime * Math.PI;
     return circlePercent;
+  };
+  public updateListIndex(index) {
+    this.activeIndex.next(index++);
+    this.index = index++;
+    console.log(index);
   }
 
 

@@ -10,7 +10,6 @@ export class AppComponent {
     private $const: ConstService
   ) { }
   public listActive ;
-  public listActive$ = this.$const.listActive$.subscribe(
-    res => console.log(this.listActive = res)
-  );
+  public listActive$ = this.$const.listActive$;
+  public data$ = this.$const.taskList$;
 }

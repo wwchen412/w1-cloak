@@ -1,4 +1,4 @@
-<div class="container-fluid body_bg" >
+<div class="container-fluid body_bg" *ngIf="listActive$ | async as listActive">
   <app-t-header [menuActive]="listActive"></app-t-header>
   <img src="../assets/img/bg1.svg" class="body_bg_btm" alt="">
   <img src="../assets/img/bg2.svg" class="body_bg_top" alt="">

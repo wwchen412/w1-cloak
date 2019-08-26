@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { mapTo, filter, mergeAll, tap, take, switchMap, throttleTime, map, mergeMap } from 'rxjs/operators';
+import { mapTo, filter, mergeAll, tap, take, switchMap, throttleTime, map, mergeMap, combineLatest, concatMap } from 'rxjs/operators';
 import { interval, of, merge, Subject, BehaviorSubject, Observable, from } from 'rxjs';
 import { element } from '@angular/core/src/render3';
 
@@ -15,9 +15,12 @@ export class ConstService {
   public startMin = 25;
   public defaultTime = this.startMin * 60;
   public restTime = 5 * 60;
-  public taskListOnholdList = [];
-  public taskListOnholdSubject = new Subject ();
-  // public taskListOnholdListSource = this.taskListOnholdList.asObservable();
+
+
+  // public taskListOnholdList = [];
+  // public taskListOnholdSubject = new Subject();
+  // public taskListOnholdList$ = of(this.taskListOnholdList);
+
 
 
 
@@ -48,13 +51,15 @@ export class ConstService {
       id: new Date('2019/08/05').getTime().toString()
     }
   ];
-  public taskList$ = from(this.taskList);
+  public taskList$ = new BehaviorSubject<any>(this.taskList);
+
   public taskListOnhold$ = this.taskList$.pipe(
-    filter(task => !task.status),
-    tap(task => this.pushToOnhold(task)),
-    switchMap(_ =>  this.taskListOnholdSubject),
-    tap(console.log)
-  )
+
+    map(lists => lists.filter(task => !task.status))
+    // tap(task => this.pushToOnhold(task)),
+    // tap(_ => console.log('-----------', this.taskListOnholdList)),
+    // switchMap(_ => this.taskListOnholdList$)
+  );
   public listActive: BehaviorSubject<any> = new BehaviorSubject<any>({ active: false, activeBtn: 'listBtnMenu' });
   public listActive$: Observable<any> = this.listActive.asObservable();
   public alramSettings = true;
@@ -69,16 +74,16 @@ export class ConstService {
 
   }
   public changeListStatus(id, checked) {
+
     for (const task of this.taskList) {
       if (task.id === id) {
         task.status = checked;
         break;
       }
+
     }
+    this.taskList$.next(this.taskList);
   }
-  private pushToOnhold(task){
-    this.taskListOnholdList.push(task);
-    this.taskListOnholdSubject.next(this.taskListOnholdList);
-  }
+
 
 }
